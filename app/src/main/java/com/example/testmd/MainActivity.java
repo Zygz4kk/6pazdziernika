@@ -1,6 +1,9 @@
 package com.example.testmd;
 
+import static android.view.View.INVISIBLE;
+
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imageView;
     private Button buttonTak, buttonNie, buttonNastepny;
     private TextView textViewPytanie;
+    private int ktorepytanie = 0;
+    private int punkty = 0;
 
 
     @Override
@@ -36,9 +41,57 @@ public class MainActivity extends AppCompatActivity {
         buttonTak = findViewById(R.id.buttonTak);
         buttonNie = findViewById(R.id.buttonNie);
         buttonNastepny = findViewById(R.id.buttonNastepne);
-        wyswietlPytanie(0);
+        wyswietlPytanie(ktorepytanie);
+        buttonNastepny.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ktorepytanie++;
+
+                        if (ktorepytanie<pytanieArrayList.size()){
+                            wyswietlPytanie(ktorepytanie);
+                        }
+                        else {
+                            buttonNastepny.setVisibility(INVISIBLE);
+
+                            for (Pytanie pytanie:pytanieArrayList) {
+                                if (pytanie.isPoprawnaOdpowiedz()){
+                                    punkty++;
+                                }
+                            }
+                            textViewPytanie.setText("Koniec testu, otrzymano "+punkty+" punkty");
+                        }
+                    }
+                }
+        );
+        buttonTak.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ustawOdpowiedz(true);
+                    }
+                }
+        );
+
+        buttonNie.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ustawOdpowiedz(false);
+                    }
+                }
+        );
 
     }
+    private void ustawOdpowiedz(boolean odp){
+        if (odp == pytanieArrayList.get(ktorepytanie).isOdpowiedz()){
+            pytanieArrayList.get(ktorepytanie).setCzyPoprawnaOdpowiedz(true);
+        }
+        else {
+            pytanieArrayList.get(ktorepytanie).setCzyPoprawnaOdpowiedz(false);
+        }
+    }
+
     private void wyswietlPytanie(int ktore){
         Pytanie pytanie = pytanieArrayList.get(ktore);
         imageView.setImageResource(pytanie.getIdZdjecia());

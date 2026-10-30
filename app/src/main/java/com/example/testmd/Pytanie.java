@@ -7,6 +7,7 @@ public class Pytanie {
     //tak - true, nie - false
     private boolean poprawnaOdpowiedz;
 
+
     public Pytanie(int idZdjecia, String trescPytania, boolean odpowiedz) {
         this.idZdjecia = idZdjecia;
         this.trescPytania = trescPytania;
@@ -31,6 +32,6 @@ public class Pytanie {
     }
 
     public void setCzyPoprawnaOdpowiedz(boolean czyPoprawnaOdpowiedz){
-
+        this.poprawnaOdpowiedz = czyPoprawnaOdpowiedz;
     }
 }
