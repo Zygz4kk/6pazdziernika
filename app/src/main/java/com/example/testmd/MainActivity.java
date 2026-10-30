@@ -8,7 +8,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
+    private ArrayList<Pytanie> pytanieArrayList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,5 +24,14 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        wystawPytania();
+    }
+    private void wystawPytania(){
+        pytanieArrayList = new ArrayList<>();
+        pytanieArrayList.add(new Pytanie(R.drawable.auto, "Czy te auto to Audi", false));
+        pytanieArrayList.add(new Pytanie(R.drawable.jabko, "Czy jablko jest popularne w Polsce", true));
+        pytanieArrayList.add(new Pytanie(R.drawable.flaga, "Czy to jest flaga Niemiec", false));
+
+
     }
 }
