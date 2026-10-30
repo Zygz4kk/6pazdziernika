@@ -2,6 +2,7 @@ package com.example.testmd;
 
 import static android.view.View.INVISIBLE;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private ArrayList<Pytanie> pytanieArrayList;
     private ImageView imageView;
-    private Button buttonTak, buttonNie, buttonNastepny;
+    private Button buttonTak, buttonNie, buttonNastepny, buttonPodpowiedz;
     private TextView textViewPytanie;
     private int ktorepytanie = 0;
     private int punkty = 0;
@@ -41,7 +42,19 @@ public class MainActivity extends AppCompatActivity {
         buttonTak = findViewById(R.id.buttonTak);
         buttonNie = findViewById(R.id.buttonNie);
         buttonNastepny = findViewById(R.id.buttonNastepne);
-        wyswietlPytanie(ktorepytanie);
+        buttonPodpowiedz = findViewById(R.id.buttonPodpowiedz);
+        wyswietlPytanie(0);
+        buttonPodpowiedz.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //intencja jawna, wiemy za pomoca czego ja wykonamy
+                        Intent intent = new Intent(MainActivity.this, PodpowiedzActivity.class);
+                        intent.putExtra("NrPytania", ktorepytanie);
+                        startActivity(intent);
+                    }
+                }
+        );
         buttonNastepny.setOnClickListener(
                 new View.OnClickListener() {
                     @Override

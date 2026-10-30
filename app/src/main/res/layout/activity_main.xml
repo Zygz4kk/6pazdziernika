@@ -60,9 +60,10 @@
         android:text="Nastepne" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/buttonPodpowiedz"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:backgroundTint="#FF9800"
+        android:text="Podpowiedz" />
 
 </LinearLayout>
