@@ -1,6 +1,9 @@
 package com.example.testmd;
 
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +15,9 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private ArrayList<Pytanie> pytanieArrayList;
+    private ImageView imageView;
+    private Button buttonTak, buttonNie, buttonNastepny;
+    private TextView textViewPytanie;
 
 
     @Override
@@ -25,6 +31,18 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
         wystawPytania();
+        imageView = findViewById(R.id.imageView2);
+        textViewPytanie = findViewById(R.id.textWiew);
+        buttonTak = findViewById(R.id.buttonTak);
+        buttonNie = findViewById(R.id.buttonNie);
+        buttonNastepny = findViewById(R.id.buttonNastepne);
+        wyswietlPytanie(0);
+
+    }
+    private void wyswietlPytanie(int ktore){
+        Pytanie pytanie = pytanieArrayList.get(ktore);
+        imageView.setImageResource(pytanie.getIdZdjecia());
+        textViewPytanie.setText(pytanie.getTrescPytania());
     }
     private void wystawPytania(){
         pytanieArrayList = new ArrayList<>();
